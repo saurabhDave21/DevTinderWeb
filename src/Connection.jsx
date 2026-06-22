@@ -9,7 +9,7 @@ const Connection = () => {
   const allConnection = useSelector((store)=>store.connection.value)
   const getConnection = async ()=>{
     try{
-        const res = await axios.get("http://localhost:7777/user/request/connection",{
+        const res = await axios.get("/api/user/request/connection",{
                 withCredentials: true,
             })
         dispatch(addConnection(res.data.data))

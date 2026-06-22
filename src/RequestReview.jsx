@@ -8,7 +8,7 @@ const RequestReview = () => {
     const [toast, settoast] = useState(false)
     const fetchRequest = async () => {
         try {
-            const res = await axios.get("http://localhost:7777/user/request/received", {
+            const res = await axios.get("/api/user/request/received", {
                 withCredentials: true,
             })
             dispatch(addRequest(res.data.requests))
@@ -21,9 +21,8 @@ const RequestReview = () => {
         fetchRequest()
     }, [])
     const handleRequest = async (value, id) => {
-        console.log(`http://localhost:7777/request/review/${value}/${id}`)
         try {
-            const res = await axios.post(`http://localhost:7777/request/review/${value}/${id}`, {}, { withCredentials: true })
+            const res = await axios.post(`/api/request/review/${value}/${id}`, {}, { withCredentials: true })
             if (res.status == 200) {
                 settoast(true)
                    let timer=setTimeout(()=>{

@@ -10,7 +10,7 @@ const NavBar = () => {
     const dispatch = useDispatch()
     const handleLogout = async()=>{
         try{
-            const res = await axios.get("http://localhost:7777/logout",{withCredentials:true})
+            const res = await axios.get("/api/logout",{withCredentials:true})
             if(res.status == 200){
                 dispatch(removeUser())
                 navigate("/login")

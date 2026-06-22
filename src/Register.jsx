@@ -26,7 +26,7 @@ const Register = () => {
                 ...data,
                 skils: data.skils.split(",")
             }
-            const res = await axios.post("http://localhost:7777/signup", data, { withCredentials: true })
+            const res = await axios.post("/api/signup", data, { withCredentials: true })
             toast.success("User Register");
             reset()
         }

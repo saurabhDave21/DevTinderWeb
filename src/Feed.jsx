@@ -10,7 +10,7 @@ const Feed = () => {
   const navigate = useNavigate();
   const fetchFeed = async () =>{
     try{
-      const res = await axios.get("http://localhost:7777/feed", { withCredentials: true }) 
+      const res = await axios.get("/api/feed", { withCredentials: true }) 
       dispatch(setFeed(res.data.users))
     }catch(err){
       console.log(err?.message)
@@ -29,7 +29,7 @@ const Feed = () => {
   }
   const handleRequest = async (status,id) =>{
     try{
-      const res = await axios.post(`http://localhost:7777/request/send/${status}/${id}`,{},{withCredentials:true})
+      const res = await axios.post(`/api/request/send/${status}/${id}`,{},{withCredentials:true})
       dispatch(removeUserFromFeed(id))
     }
     catch(err){

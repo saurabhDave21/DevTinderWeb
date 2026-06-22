@@ -12,8 +12,8 @@ const Body = () => {
     const userData = useSelector((store)=>store.user)
     async function getUser() {
         try {
-            if(userData) return;
-            const user = await axios.get("http://localhost:7777/profile/view",{ withCredentials: true })
+            if(usesrData) return;
+            const user = await axios.get("/api/profile/view",{ withCredentials: true })
             dispatch(addUser(user.data.data))
             navigate("/")  
         }

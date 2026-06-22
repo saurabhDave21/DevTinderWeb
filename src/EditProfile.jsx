@@ -21,7 +21,7 @@ const EditProfile = ({ setModal }) => {
     const dispatch = useDispatch()
     const onSubmit = async (data) => {
         try{
-            const res = await axios.patch("http://localhost:7777/profile/edit",data,{withCredentials:true})
+            const res = await axios.patch("/api/profile/edit",data,{withCredentials:true})
             dispatch(addUser(res.data))
             setModal((prev)=>!prev)
         }

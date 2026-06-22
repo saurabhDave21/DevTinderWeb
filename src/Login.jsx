@@ -12,7 +12,7 @@ const Login = () => {
     const navigate = useNavigate()
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("http://localhost:7777/login", data, {
+            const res = await axios.post("/api/login", data, {
                 withCredentials: true,
             })
             dispatch(addUser(res.data.data))
