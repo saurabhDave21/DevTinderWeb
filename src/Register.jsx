@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 import { Link } from "react-router-dom"
  import { ToastContainer, toast } from 'react-toastify';
+import { BASE_URL } from '../utils/Constant';
 const Register = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
@@ -26,7 +27,7 @@ const Register = () => {
                 ...data,
                 skils: data.skils.split(",")
             }
-            const res = await axios.post("/api/signup", data, { withCredentials: true })
+            const res = await axios.post(BASE_URL+"/signup", data, { withCredentials: true })
             toast.success("User Register");
             reset()
         }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Link, useNavigate} from "react-router-dom"
 import axios  from 'axios'
 import { removeUser } from '../utils/userReducer'
+import { BASE_URL } from '../utils/Constant'
 const NavBar = () => {
     const user = useSelector((store)=>store.user)
     const countConnection = useSelector((store)=>store.connection.value)
@@ -10,7 +11,7 @@ const NavBar = () => {
     const dispatch = useDispatch()
     const handleLogout = async()=>{
         try{
-            const res = await axios.get("/api/logout",{withCredentials:true})
+            const res = await axios.get(BASE_URL+"/logout",{withCredentials:true})
             if(res.status == 200){
                 dispatch(removeUser())
                 navigate("/login")

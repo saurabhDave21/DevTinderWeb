@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 import { Link } from "react-router-dom"
  import { ToastContainer, toast } from 'react-toastify';
+ import {BASE_URL} from "../utils/Constant"
 const EditProfile = ({ setModal }) => {
     const { register, handleSubmit, formState: { errors }, reset ,setValue } = useForm({
         defaultValues: {
@@ -21,7 +22,7 @@ const EditProfile = ({ setModal }) => {
     const dispatch = useDispatch()
     const onSubmit = async (data) => {
         try{
-            const res = await axios.patch("/api/profile/edit",data,{withCredentials:true})
+            const res = await axios.patch(BASE_URL+"/profile/edit",data,{withCredentials:true})
             dispatch(addUser(res.data))
             setModal((prev)=>!prev)
         }

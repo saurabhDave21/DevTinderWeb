@@ -6,13 +6,14 @@ import { addUser, removeUser } from "../utils/userReducer"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 import {Link} from "react-router-dom"
+import { BASE_URL } from '../utils/Constant';
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("/api/login", data, {
+            const res = await axios.post(BASE_URL+"/login", data, {
                 withCredentials: true,
             })
             dispatch(addUser(res.data.data))

@@ -5,6 +5,7 @@ import Footer from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from "axios"
 import { addUser } from '../utils/userReducer'
+import { BASE_URL } from '../utils/Constant'
 
 const Body = () => {
     const dispatch = useDispatch()
@@ -12,21 +13,21 @@ const Body = () => {
     const userData = useSelector((store)=>store.user)
     async function getUser() {
         try {
-            if(usesrData) return;
-            const user = await axios.get("/api/profile/view",{ withCredentials: true })
-            dispatch(addUser(user.data.data))
-            navigate("/")  
-        }
-        catch (err) {
-            if(err.response?.status == 400){
-                navigate("/login")
+            if (userData) return;
+            const response = await axios.get(BASE_URL + "/profile/view", { withCredentials: true });
+            console.log(response);
+            dispatch(addUser(response.data.data));
+            navigate("/");
+        } catch (err) {
+            if (err.response?.status === 400) {
+                navigate("/login");
             }
-            console.log(err)
+            console.log(err?.message);
         }
     }
     useEffect(() => {
-        getUser()
-    }, [])
+        getUser();
+    }, [userData, navigate]);
     return (
         <>
             <NavBar />

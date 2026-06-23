@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { useDispatch, useSelector } from 'react-redux'
 import { addRequest } from "../utils/requestreducer"
+import { BASE_URL } from '../utils/Constant'
 const RequestReview = () => {
     const dispatch = useDispatch()
     const request = useSelector((store) => store.request)
@@ -22,7 +23,7 @@ const RequestReview = () => {
     }, [])
     const handleRequest = async (value, id) => {
         try {
-            const res = await axios.post(`/api/request/review/${value}/${id}`, {}, { withCredentials: true })
+            const res = await axios.post(BASE_URL+`/request/review/${value}/${id}`, {}, { withCredentials: true })
             if (res.status == 200) {
                 settoast(true)
                    let timer=setTimeout(()=>{

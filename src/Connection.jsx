@@ -4,12 +4,13 @@ import { addConnection } from '../utils/connectionReducer';
 import axios from "axios"
 import { Link } from 'react-router-dom';
 import { IoMdArrowBack } from 'react-icons/io';
+import { BASE_URL } from '../utils/Constant';
 const Connection = () => {
   const dispatch =useDispatch()
   const allConnection = useSelector((store)=>store.connection.value)
   const getConnection = async ()=>{
     try{
-        const res = await axios.get("/api/user/request/connection",{
+        const res = await axios.get(BASE_URL+"/user/request/connection",{
                 withCredentials: true,
             })
         dispatch(addConnection(res.data.data))

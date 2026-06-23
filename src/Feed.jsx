@@ -3,39 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { setFeed, removeUserFromFeed } from "../utils/feedReducer"
+import { BASE_URL } from "../utils/Constant";
+
 const Feed = () => {
   const user = useSelector((store) => store.user);
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const fetchFeed = async () =>{
-    try{
-      const res = await axios.get("/api/feed", { withCredentials: true }) 
-      dispatch(setFeed(res.data.users))
-    }catch(err){
-      console.log(err?.message)
-    }
-  }
   useEffect(() => {
+    const fetchFeed = async () => {
+      try {
+        const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
+        dispatch(setFeed(res.data.users));
+      } catch (err) {
+        console.log(err?.message);
+      }
+    };
+
     if (!user) {
       navigate("/login");
+    } else {
+      fetchFeed();
     }
-    else{
-      fetchFeed()
-    }
-  }, []);
-  if(feed?.value?.length==0){
-    return <h1 className="flex justify-center my-10 ">No User Found</h1>
+  }, [user, navigate]);
+
+  if (feed?.value?.length === 0) {
+    return <h1 className="flex justify-center my-10 ">No User Found</h1>;
   }
-  const handleRequest = async (status,id) =>{
-    try{
-      const res = await axios.post(`/api/request/send/${status}/${id}`,{},{withCredentials:true})
-      dispatch(removeUserFromFeed(id))
+
+  const handleRequest = async (status, id) => {
+    if (!id) return;
+    try {
+      await axios.post(`${BASE_URL}/request/send/${status}/${id}`, {}, { withCredentials: true });
+      dispatch(removeUserFromFeed(id));
+    } catch (err) {
+      console.log(err?.message);
     }
-    catch(err){
-      console.log(err?.message)
-    }
-  }
+  }  
   const currentUser = feed?.value?.[0];
   return (
     <div>
