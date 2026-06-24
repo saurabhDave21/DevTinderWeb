@@ -9,7 +9,7 @@ const RequestReview = () => {
     const [toast, settoast] = useState(false)
     const fetchRequest = async () => {
         try {
-            const res = await axios.get("/api/user/request/received", {
+            const res = await axios.get("/user/request/received", {
                 withCredentials: true,
             })
             dispatch(addRequest(res.data.requests))
